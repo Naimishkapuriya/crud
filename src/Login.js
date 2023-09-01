@@ -15,7 +15,7 @@ const Login = () => {
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
 
   // =======================Validation=======================
 
