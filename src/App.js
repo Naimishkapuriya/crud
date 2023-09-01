@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Create from "./Create";
+// import Update from "./Update";
+import Home from "./Home";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Validation from "./Validation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SignUp from "./SignUp";
+import Error from "./Error";
+import Login from "./Login";
 
 function App() {
+  const isCreate = true;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/create" element={<Validation isCreate={isCreate} />}></Route>
+          <Route path="/update/:EditId" element={<Validation isUpdate={isCreate} />}></Route>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer theme="dark" autoClose={1000} />
+    </>
   );
 }
 
