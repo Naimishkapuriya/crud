@@ -15,21 +15,9 @@ const SignUp = () => {
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
   // =================Validation ==================
 
-  // const validateEmail = () => {
-  //   if (!/\S+@\S+\.\S+/.test(email)) {
-  //     setEmailError("*Email is required");
-  //     return;
-  //   }
-  // };
-  // const validatePassword = () => {
-  //   if (!/^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$/.test(password)) {
-  //     setPasswordError("*Password is required");
-  //     return;
-  //   }
-  // };
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
     const errors = {};
