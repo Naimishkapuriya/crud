@@ -18,6 +18,7 @@ const SignUp = () => {
   }, [navigate]);
   // =================Validation ==================
 
+  
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
     const errors = {};
