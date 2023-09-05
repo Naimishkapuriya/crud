@@ -123,20 +123,6 @@ const Validation = ({ isCreate, isUpdate }) => {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              {/* <label class="dropdown">
-                <div class="dd-button">Dropdown</div>
-                <input
-                  type="checkbox"
-                  class="dd-input"
-                  id="test"
-                  onChange={handleChange}
-                  value={values?.title}
-                />
-                <ul class="dd-menu">
-                  <li>Mr</li>
-                  <li>Miss</li>
-                </ul>
-              </label> */}
               <div className="mb-2">
                 <label htmlFor="title" className="fw-bold mb-1">
                   Title:

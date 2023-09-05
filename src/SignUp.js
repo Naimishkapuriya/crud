@@ -18,7 +18,10 @@ const SignUp = () => {
   }, [navigate]);
   // =================Validation ==================
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> forms
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
     const errors = {};

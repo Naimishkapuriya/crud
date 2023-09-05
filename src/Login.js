@@ -70,20 +70,6 @@ const Login = () => {
       .catch((err) => {
         toast.error(err);
       });
-    // axios
-    //   .post("https://reqres.in/api/login", {
-    //     email: email,
-    //     password: password,
-    //   })
-    // .then((result) => {
-    //   console.log(result.data);
-    //   localStorage.setItem("token", result.data.token);
-    //   navigate("/home");
-    //   toast.success("Login Successfully");
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   };
   return (
     <div className="Auth-form-container">
