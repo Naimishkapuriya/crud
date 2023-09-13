@@ -4,12 +4,11 @@
 //   render() {
 //     return (
 //       <div>
-        
+
 //       </div>
 //     )
 //   }
 // }
-
 
 // import React from 'react';
 // import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -57,8 +56,6 @@
 //     </Formik>
 //   </div>
 // );
-
-
 
 // import React from "react";
 // import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -116,11 +113,11 @@
 //                     className="form-control mt-1"
 //                     placeholder="Email Address"
 //                   />
-                //   <ErrorMessage
-                //     name="email"
-                //     component="span"
-                //     className="error text-danger"
-                //   />
+//                  <ErrorMessage
+//                   name="email"
+//                      component="span"
+//                  className="error text-danger"
+//                     />
 //                 </div>
 //                 <div className="form-group mt-3 emoji_r">
 //                   <label>Password</label>
