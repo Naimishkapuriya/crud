@@ -43,11 +43,6 @@
 //       validationErrors.firstName = "*Numbers Not Allowed";
 //     }
 
-//     if (!values.lastName.trim()) {
-//       validationErrors.lastName = "*Last Name Is Required";
-//     } else if (!/^[^\d]*$/.test(values.lastName)) {
-//       validationErrors.lastName = "*Numbers Not Allowed";
-//     }
 
 //     setErrors(validationErrors);
 
