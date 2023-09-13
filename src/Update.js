@@ -26,7 +26,7 @@
 //         setValues(res.data);
 //       })
 //       .catch((err) => console.log(err));
-    
+
 //   }, []);
 
 //   const validate = () => {
@@ -86,15 +86,7 @@
 //         <div className="d-flex align-item-center justify-content-center ">
 //           <div className="w-50 border bg-white shadow px-5 pt-3 pb-4 rounded ">
 //             <h1 className="text-center">Edit User</h1>
-//             {isLoading ? (
-//               <div v-if="loading" class="spinner">
-//                 <div class="rect1"></div>
-//                 <div class="rect2"></div>
-//                 <div class="rect3"></div>
-//                 <div class="rect4"></div>
-//                 <div class="rect5"></div>
-//               </div>
-//             ) : (
+
 //               <>
 //                 <form onSubmit={handleSubmit}>
 //                   <div>
@@ -149,7 +141,7 @@
 //                       <span className="text-danger">{errors.lastName}</span>
 //                     )}
 //                   </div>
-                 
+
 //                   <div className="mt-4">
 //                     <button className="submitbtn me-2">Update</button>
 //                     <Link to="/" className="backbtn text-decoration-none">
@@ -158,7 +150,7 @@
 //                   </div>
 //                 </form>
 //               </>
-//             )}
+
 //           </div>
 //         </div>
 //       </div>
