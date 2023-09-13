@@ -86,13 +86,11 @@
 //         <div className="d-flex align-item-center justify-content-center ">
 //           <div className="w-50 border bg-white shadow px-5 pt-3 pb-4 rounded ">
 //             <h1 className="text-center">Edit User</h1>
-
 //               <>
 //                 <form onSubmit={handleSubmit}>
 //                   <div>
 //                     <span className="fw-bold mb-2">Id:</span>  <span>{id}</span>
 //                   </div>
-
 //                   <div className="mb-2">
 //                     <label htmlFor="title" className="fw-bold mb-1">
 //                       Title:
@@ -141,7 +139,6 @@
 //                       <span className="text-danger">{errors.lastName}</span>
 //                     )}
 //                   </div>
-
 //                   <div className="mt-4">
 //                     <button className="submitbtn me-2">Update</button>
 //                     <Link to="/" className="backbtn text-decoration-none">
@@ -150,7 +147,6 @@
 //                   </div>
 //                 </form>
 //               </>
-
 //           </div>
 //         </div>
 //       </div>
