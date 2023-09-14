@@ -108,6 +108,15 @@ label {
   border-radius: 50%;
   transition: 0.5s;
 }
+.password_r {
+  position: relative;
+}
+.password_a {
+  position: absolute;
+  top: 28px;
+  right: 5px;
+  font-size: 22px;
+}
 
 .flex {
   display: flex;
@@ -312,24 +321,12 @@ label {
   padding: 10px 20px;
 } */
 
-.password_r {
-  position: relative;
-}
-.password_a {
-  position: absolute;
-  top: 28px;
-  right: 5px;
-  font-size: 22px;
-}
+
 
 .page_404 {
   padding: 40px 0;
   background: #fff;
   font-family: "Arvo", serif;
-}
-
-.page_404 img {
-  width: 100%;
 }
 
 .four_zero_four_bg {
@@ -341,7 +338,6 @@ label {
 
 .four_zero_four_bg h1 {
   font-size: 80px;
-  text-align: center;
 }
 
 .four_zero_four_bg h3 {
