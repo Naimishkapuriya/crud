@@ -54,9 +54,9 @@ function Home() {
     // getUserData();
   }, [navigate, page]);
   const handelInfiniteScroll = () => {
-    // console.log("scrollHeight" + document.documentElement.scrollHeight);
-    // console.log("innerHeight" + window.innerHeight);
-    // console.log("scrollTop" + document.documentElement.scrollTop);
+    console.log("scrollHeight" + document.documentElement.scrollHeight);
+    console.log("innerHeight" + window.innerHeight);
+    console.log("scrollTop" + document.documentElement.scrollTop);
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
