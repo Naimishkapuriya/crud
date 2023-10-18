@@ -7,9 +7,6 @@
   cursor: pointer;
 }
 
-table tr:hover {
-    font-weight: 600;
-}
 .App {
   background-color: white;
 }

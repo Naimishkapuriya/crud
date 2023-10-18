@@ -7,9 +7,10 @@ import { toast } from "react-toastify";
 function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const limit = 20;
+  const [page, setPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     document.title = "User list";
@@ -20,15 +21,21 @@ function Home() {
 
     axios({
       method: "get",
-      url: `user?page=${currentPage}&limit=${limit}`,
+      url: `user?page=${page}&limit=${limit}`,
+      // url: `user?page=${currentPage}&limit=${limit}`,
     })
       .then(({ data: res }) => {
+        setData((prev) => [...prev, ...res.data]); // new
+        // setData(res.data)  //old
         setIsLoading(false);
-        setData(res.data);
       })
       .catch((e) => {
         console.log("error", e);
       });
+
+    // const handleSubmit
+    // window.addEventListener("scroll", handleScroll)
+    // return() => window.removeEventListener("scroll")
 
     // async function getUserData() {
     //   try {
@@ -45,8 +52,28 @@ function Home() {
     //   }
     // }
     // getUserData();
-  }, [currentPage, navigate]);
+  }, [navigate, page]);
+  const handelInfiniteScroll = () => {
+    // console.log("scrollHeight" + document.documentElement.scrollHeight);
+    // console.log("innerHeight" + window.innerHeight);
+    // console.log("scrollTop" + document.documentElement.scrollTop);
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        // setIsLoading(true);
+        setPage((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    window.addEventListener("scroll", handelInfiniteScroll);
+    return () => window.removeEventListener("Scroll", handelInfiniteScroll);
+  }, []);
   // ===============================delete========================================
   function handleSubmit(id) {
     const conf = toast.warn("Dalete Successfully");
@@ -83,6 +110,22 @@ function Home() {
   //         console.log(err);
   //       });
   //   }, []);
+
+  // const fetchData = () => {
+  //   setPagenumber(pagenumber + 1);
+
+  //   axios({
+  //     method: "get",
+  //     url: `user?page=${pagenumber}&limit=${limit}`,
+  //   })
+  //     .then(({ data: res }) => {
+  //       setIsLoading(false);
+  //       setData(data.concat(res.data));
+  //     })
+  //     .catch((e) => {
+  //       console.log("error", e);
+  //     });
+  // };
 
   return (
     <div className="container mt-3">
@@ -153,7 +196,8 @@ function Home() {
               </table>
             </>
           )}
-          <div className="d-flex justify-content-between">
+
+          {/* <div className="d-flex justify-content-between">
             <div>
               <button
                 className="backbtn"
@@ -172,7 +216,7 @@ function Home() {
                 Next
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
