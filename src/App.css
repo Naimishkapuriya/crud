@@ -7,6 +7,9 @@
   cursor: pointer;
 }
 
+table tr:hover {
+    font-weight: 600;
+}
 .App {
   background-color: white;
 }
@@ -21,7 +24,7 @@
 
 .Auth-form {
   width: 420px;
-  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  box-shadow: rgb(0 0 0 / 35%) 1px 1px 10px;
   padding-top: 30px;
   padding-bottom: 20px;
   border-radius: 8px;
@@ -52,7 +55,7 @@ label {
 .submitbtn,
 .editbtn,
 .backbtn,
-.deletebtn, 
+.deletebtn,
 .errorbtn {
   padding: 5px 15px;
   color: #fff;
@@ -107,6 +110,15 @@ label {
 .images {
   border-radius: 50%;
   transition: 0.5s;
+}
+.password_r {
+  position: relative;
+}
+.password_a {
+  position: absolute;
+  top: 28px;
+  right: 5px;
+  font-size: 22px;
 }
 
 .flex {
@@ -250,14 +262,11 @@ label {
   font-size: 22px;
 }
 
+
 .page_404 {
   padding: 40px 0;
   background: #fff;
   font-family: "Arvo", serif;
-}
-
-.page_404 img {
-  width: 100%;
 }
 
 .four_zero_four_bg {
@@ -269,7 +278,6 @@ label {
 
 .four_zero_four_bg h1 {
   font-size: 80px;
-  text-align: center;
 }
 
 .four_zero_four_bg h3 {

@@ -15,8 +15,9 @@ const SignUp = () => {
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
   // =================Validation ==================
+
 
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
