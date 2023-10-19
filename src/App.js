@@ -9,7 +9,7 @@ import SignUp from "./SignUp";
 import Error from "./Error";
 import Login from "./Login";
 // import Demo from "./Demo";
-
+import Demo1 from "./Demo1"
 function App() {
   const isCreate = true;
   return (
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />}></Route>
-          {/* <Route path="/demo" element={<Demo/>}></Route> */}
+          <Route path="/demo1" element={<Demo1/>}></Route>
           <Route path="/create" element={<Validation isCreate={isCreate} />}></Route>
           <Route path="/update/:EditId" element={<Validation isUpdate={isCreate} />}></Route>
           <Route path="*" element={<Error />} />

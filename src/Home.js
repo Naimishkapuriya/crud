@@ -3,6 +3,7 @@ import axios from "./Axios";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import BackToTopButton from "./BackToTopButton";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -177,7 +178,7 @@ function Home() {
                         <td className="flex-wrap">
                           <Link
                             to={`/update/${user.id}`}
-                            className="editbtn me-2 text-decoration-none jAFeHK"
+                            className="editbtn me-2 text-decoration-none"
                           >
                             Edit
                           </Link>
@@ -196,7 +197,7 @@ function Home() {
               </table>
             </>
           )}
-
+          <BackToTopButton />
           {/* <div className="d-flex justify-content-between">
             <div>
               <button

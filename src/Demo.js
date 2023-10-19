@@ -157,7 +157,7 @@
 //                         <td className="flex-wrap">
 //                           <Link
 //                             to={`/update/${user.id}`}
-//                             className="editbtn me-2 text-decoration-none jAFeHK"
+//                             className="editbtn me-2 text-decoration-none "
 //                           >
 //                             Edit
 //                           </Link>

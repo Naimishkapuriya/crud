@@ -6,10 +6,6 @@
 .Pointer {
   cursor: pointer;
 }
-
-table tr:hover {
-    font-weight: 600;
-}
 .App {
   background-color: white;
 }
@@ -262,7 +258,6 @@ label {
   font-size: 22px;
 }
 
-
 .page_404 {
   padding: 40px 0;
   background: #fff;
@@ -288,3 +283,31 @@ label {
   margin-top: -50px;
   text-align: center;
 }
+
+/* ===bacl to top button ============ */
+
+.back-to-top {
+  font-weight: bold;
+  color: #fff;
+  background: #2c3034;
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  text-align: center;
+  line-height: 48px;
+  border: none;
+  border-radius: 50%;
+  font-size: 21px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+/* .filler{
+  min-height: 1024px;
+  text-align: center;
+  color:#fff;
+  font-family: Verdana;
+  font-size: 100px;
+  padding: 50px 0;
+} */
