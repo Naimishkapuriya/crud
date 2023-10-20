@@ -126,7 +126,7 @@ label {
   display: flex;
   flex-flow: column;
   min-width: 598px;
-  width: 598px;
+  width: 100%;
   height: 600px;
   min-height: 200px;
   border-radius: 8px;

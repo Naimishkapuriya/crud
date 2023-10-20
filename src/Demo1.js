@@ -55,28 +55,6 @@ const Demo1 = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  const columns = [
-    {
-      name: "picture",
-      selector: (row) => row.picture,
-    },
-    {
-      name: "Title",
-      selector: (row) => row.title,
-    },
-    {
-      name: "firstName",
-      selector: (row) => row.firstName,
-    },
-    {
-      name: "LastName",
-      selector: (row) => row.lastName,
-    },
-    {
-      name : "Id",
-      selector : (row) => row.id
-    }
-  ];
   const limit = 20;
 
   useEffect(() => {
@@ -92,7 +70,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "6530f842e161cf3d7f5132a2",
+              "app-id": "6532238b3b559d8b318632ed",
             },
           }
         );
@@ -105,7 +83,7 @@ const Demo1 = () => {
     };
     fetchData();
   }, [page]);
-
+  // ===================Infinit================
   const handelInfiniteScroll = () => {
     console.log("scrollHeight" + document.documentElement.scrollHeight);
     console.log("innerHeight" + window.innerHeight);
@@ -122,22 +100,27 @@ const Demo1 = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     window.addEventListener("scroll", handelInfiniteScroll);
     return () => window.removeEventListener("Scroll", handelInfiniteScroll);
   }, []);
+
+  // ========logout===============
+
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
     toast.success("Logout Successfully");
   };
+
+  // =========Dalete=========
+
   function handleSubmit(id) {
     const conf = toast.warn("Dalete Successfully");
     if (conf) {
       axios({
         method: "delete",
-        url: `user/${id}`,
+        url: `https://dummyapi.io/data/v1/user/${id}`,
       })
         .then(() => {
           navigate("/home");
@@ -148,46 +131,88 @@ const Demo1 = () => {
       window.location.reload();
     }, 1500);
   }
+  // ==================table================
 
+  const columns = [
+    {
+      name: "Title",
+      selector: (row) => row.title,
+    },
+    {
+      name: "firstName",
+      selector: (row) => row.firstName,
+    },
+    {
+      name: "LastName",
+      selector: (row) => row.lastName,
+    },
+
+    {
+      name: "Actions",
+      cell: (row) => (
+        <>
+          <Link
+            to={`/update/${row.id}`}
+            className="editbtn me-2 text-decoration-none "
+          >
+            Edit
+          </Link>
+          <button onClick={() => handleSubmit(row.id)} className="deletebtn">
+            Delete
+          </button>
+        </>
+      ),
+    },
+  ];
+  
   return (
     <>
-      <div className="d-flex justify-content-between mb-2">
-        <Link to="/create" className="addbtn text-decoration-none">
-          Add +
-        </Link>
-        <button onClick={logout} className="deletebtn">
-          Logout
-        </button>
-      </div>
-      {isLoading ? (
-        <div class="widget">
-          <header class="widget__header"></header>
-          <div class="widget__body">
-            <div class="list-component list-loader"></div>
+      <div className="container mt-3">
+        <div className="d-flex flex-column align-items-center vh-100">
+          <h1 className="text-center">List of Users</h1>
+          <div className="w-75 rounded bg-white border shadow p-4">
+            <div className="d-flex justify-content-between mb-2">
+              <Link to="/create" className="addbtn text-decoration-none">
+                Add +
+              </Link>
+              <button onClick={logout} className="deletebtn">
+                Logout
+              </button>
+            </div>
+            {isLoading ? (
+              <div class="widget">
+                <header class="widget__header"></header>
+                <div class="widget__body">
+                  <div class="list-component list-loader"></div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <DataTable columns={columns} data={data} />
+                {/* {data.map((user) => {
+                  return (
+                    <>
+                      <Link
+                        to={`/update/${user.id}`}
+                        className="editbtn me-2 text-decoration-none "
+                      >
+                        Edit
+                      </Link>
+
+                      <button
+                        onClick={(e) => handleSubmit(user.id)}
+                        className="deletebtn"
+                      >
+                        Delete
+                      </button>
+                    </>
+                  );
+                })} */}
+              </div>
+            )}
           </div>
         </div>
-      ) : (
-        <div className="container mt-3">
-          <h1 className="text-center">List of Users</h1>
-          <DataTable columns={columns} data={data} />
-          {data.map((user) => {
-            return (
-              <>
-                <Link
-                  to={`/update/${user.id}`}
-                  className="editbtn me-2 text-decoration-none "
-                >
-                  Edit
-                </Link>
-
-                <button onClick={(e) => handleSubmit(user.id)} className="deletebtn">
-                  Delete
-                </button>
-              </>
-            );
-          })}
-        </div>
-      )}
+      </div>
     </>
   );
 };
