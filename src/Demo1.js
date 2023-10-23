@@ -149,7 +149,7 @@ const Demo1 = () => {
 
     {
       name: "Actions",
-      cell: (row) => (
+      selector: (row) => (
         <>
           <Link
             to={`/update/${row.id}`}
@@ -164,7 +164,7 @@ const Demo1 = () => {
       ),
     },
   ];
-  
+
   return (
     <>
       <div className="container mt-3">
