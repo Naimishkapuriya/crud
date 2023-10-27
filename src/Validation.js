@@ -160,6 +160,7 @@ const Validation = ({ isUpdate }) => {
   };
 
   return (
+    <>
     <div className="container mt-5">
       <div className="d-flex align-item-center justify-content-center">
         <div className="w-50 border bg-white shadow px-5 pt-3 pb-4 rounded">
@@ -250,6 +251,7 @@ const Validation = ({ isUpdate }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
