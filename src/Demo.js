@@ -239,3 +239,93 @@
 // }
 
 // export default Demo;
+
+const Demo1 = () => {
+  // ... other state and variables
+
+  // ==============================================++++++++++++++++++++=================================
+  // const columns = [
+  //   {
+  //     name: "Title",
+  //     selector: (row) => row.title,
+  //   },
+  //   {
+  //     name: "firstName",
+  //     selector: (row) => row.firstName,
+  //   },
+  //   {
+  //     name: "LastName",
+  //     selector: (row) => row.lastName,
+  //   },
+
+  //   {
+  //     name: "Actions",
+  //     selector: (row) => (
+  //       <>
+  //         <Link
+  //           to={`/update/${row.id}`}
+  //           className="editbtn me-2 text-decoration-none "
+  //         >
+  //           Edit
+  //         </Link>
+  //         <button onClick={() => handleSubmit(row.id)} className="deletebtn">
+  //           Delete
+  //         </button>
+  //       </>
+  //     ),
+  //   },
+  // ];
+
+  // return (
+  //   <>
+  //     <div className="container mt-3">
+  //       <div className="d-flex flex-column align-items-center vh-100">
+  //         <h1 className="text-center">List of Users</h1>
+  //         <div className="w-75 rounded bg-white border shadow p-4">
+  //           <div className="d-flex justify-content-between mb-2">
+  //             <Link to="/create" className="addbtn text-decoration-none">
+  //               Add +
+  //             </Link>
+  //             <button onClick={logout} className="deletebtn">
+  //               Logout
+  //             </button>
+  //           </div>
+  //           {isLoading ? (
+//   <div className="widget">
+//     <header className="widget__header"></header>
+//     <div className="widget__body">
+//       <div className="list-component list-loader"></div>
+//     </div>
+//   </div>;
+  //           ) : (
+  //             <div>
+  //               <DataTable columns={columns} data={data} />
+  //               {/* {data.map((user) => {
+  //                 return (
+  //                   <>
+  //                     <Link
+  //                       to={`/update/${user.id}`}
+  //                       className="editbtn me-2 text-decoration-none "
+  //                     >
+  //                       Edit
+  //                     </Link>
+
+  //                     <button
+  //                       onClick={(e) => handleSubmit(user.id)}
+  //                       className="deletebtn"
+  //                     >
+  //                       Delete
+  //                     </button>
+  //                   </>
+  //                 );
+  //               })} */}
+  //             </div>
+  //           )}
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </>
+  // );
+};
+
+export default Demo1;

@@ -1,60 +1,16 @@
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-
-// const Demo1 = () => {
-//   const [data, setData] = useState([]);
-//   const column = [
-//     {
-//       name: "picture",
-//       selector: (row) => row.picture,
-//     },
-//     {
-//       name: "Title",
-//       selector: (row) => row.title,
-//     },
-//     {
-//       name: "firstName",
-//       selector: (row) => row.firstName,
-//     },
-//     {
-//       name: "LastName",
-//       selector: (row) => row.lastName,
-//     },
-//   ];
-//   useEffect(() => {
-//     const fetData = async () => {
-//       axios.get(`https://dummyapi.io/data/v1/user?page=1&limit=10`),
-//         {
-//           headers: {
-//             "app-id": "6530d2664d41234c68cd94ed",
-//           },
-//         }
-//         .then((data) => {
-//           setData(data.data)  //old
-//         })
-//         .catch((e) => {
-//           console.log("error", e);
-//         });
-//       }
-//     fetData();
-//   }, []);
-//   return <div></div>;
-// };
-
-// export default Demo1;
-
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
+import React, { useEffect, useState, useMemo } from "react";
+// import DataTable from "react-data-table-component";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTable } from "react-table";
+import BackToTopButton from "./BackToTopButton";
 
 const Demo1 = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-
   const limit = 20;
 
   useEffect(() => {
@@ -70,7 +26,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "6532238b3b559d8b318632ed",
+              "app-id": "653b5f77abd70977bb6f21f5",
             },
           }
         );
@@ -82,12 +38,9 @@ const Demo1 = () => {
       }
     };
     fetchData();
-  }, [page]);
+  }, [page, navigate]);
   // ===================Infinit================
   const handelInfiniteScroll = () => {
-    console.log("scrollHeight" + document.documentElement.scrollHeight);
-    console.log("innerHeight" + window.innerHeight);
-    console.log("scrollTop" + document.documentElement.scrollTop);
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -133,87 +86,132 @@ const Demo1 = () => {
   }
   // ==================table================
 
-  const columns = [
-    {
-      name: "Title",
-      selector: (row) => row.title,
-    },
-    {
-      name: "firstName",
-      selector: (row) => row.firstName,
-    },
-    {
-      name: "LastName",
-      selector: (row) => row.lastName,
-    },
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Picture",
+        Footer: "picture",
+        accessor: "picture",
+        Cell: ({ row }) => <img width={50} height={50} src={row.original.picture} alt="picture" />,
+      },
+      {
+        Header: "Title",
+        Footer: "Title",
+        accessor: "title",
+      },
+      {
+        Header: "First Name",
+        Footer: "First Name",
+        accessor: "firstName",
+      },
+      {
+        Header: "Last Name",
+        Footer: "Last Name",
+        accessor: "lastName",
+      },
+      {
+        Header: "Actions",
+        Footer: "Actions",
+        accessor: "id",
+        Cell: ({ value }) => (
+          <>
+            <Link
+              to={`/update/${value}`}
+              className="editbtn me-2 text-decoration-none"
+            >
+              Edit
+            </Link>
+            <button onClick={() => handleSubmit(value)} className="deletebtn">
+              Delete
+            </button>
+          </>
+        ),
+      },
+    ],
+    []
+  );
 
-    {
-      name: "Actions",
-      selector: (row) => (
-        <>
-          <Link
-            to={`/update/${row.id}`}
-            className="editbtn me-2 text-decoration-none "
-          >
-            Edit
-          </Link>
-          <button onClick={() => handleSubmit(row.id)} className="deletebtn">
-            Delete
-          </button>
-        </>
-      ),
-    },
-  ];
+  const tableInstance = useTable({
+    columns,
+    data,
+  });
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    footerGroups,
+    rows,
+    prepareRow,
+  } = tableInstance;
 
   return (
-    <>
-      <div className="container mt-3">
-        <div className="d-flex flex-column align-items-center vh-100">
-          <h1 className="text-center">List of Users</h1>
-          <div className="w-75 rounded bg-white border shadow p-4">
-            <div className="d-flex justify-content-between mb-2">
-              <Link to="/create" className="addbtn text-decoration-none">
-                Add +
-              </Link>
-              <button onClick={logout} className="deletebtn">
-                Logout
-              </button>
-            </div>
-            {isLoading ? (
-              <div class="widget">
-                <header class="widget__header"></header>
-                <div class="widget__body">
-                  <div class="list-component list-loader"></div>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <DataTable columns={columns} data={data} />
-                {/* {data.map((user) => {
-                  return (
-                    <>
-                      <Link
-                        to={`/update/${user.id}`}
-                        className="editbtn me-2 text-decoration-none "
-                      >
-                        Edit
-                      </Link>
-
-                      <button
-                        onClick={(e) => handleSubmit(user.id)}
-                        className="deletebtn"
-                      >
-                        Delete
-                      </button>
-                    </>
-                  );
-                })} */}
-              </div>
-            )}
+    <div className="container mt-3">
+      <div className="d-flex flex-column align-items-center vh-100">
+        <h1 className="text-center">List of Users</h1>
+        <div className="w-50 rounded bg-white border shadow p-4">
+          <div className="d-flex justify-content-between mb-2">
+            <Link to="/create" className="addbtn text-decoration-none">
+              Add +
+            </Link>
+            <button onClick={logout} className="deletebtn">
+              Logout
+            </button>
           </div>
+          {isLoading ? (
+            <div className="widget">
+              <header className="widget__header"></header>
+              <div className="widget__body">
+                <div className="list-component list-loader"></div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <table {...getTableProps()} className="table table-dark table-striped mb-0">
+                <thead>
+                  {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column) => (
+                        <th {...column.getHeaderProps()}>
+                          {column.render("Header")}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                  {rows.map((row) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()}>
+                        {row.cells.map((cell) => {
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+                <tfoot>
+                  {footerGroups.map((footerGroups) => (
+                    <tr {...footerGroups.getFooterGroupProps()}>
+                      {footerGroups.headers.map((column) => (
+                        <td {...column.getFooterProps}>
+                          {column.render("Footer")}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tfoot>
+              </table>
+            </div>
+          )}
+          <BackToTopButton />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

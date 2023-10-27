@@ -55,9 +55,6 @@ function Home() {
     // getUserData();
   }, [navigate, page]);
   const handelInfiniteScroll = () => {
-    console.log("scrollHeight" + document.documentElement.scrollHeight);
-    console.log("innerHeight" + window.innerHeight);
-    console.log("scrollTop" + document.documentElement.scrollTop);
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -143,10 +140,10 @@ function Home() {
             </button>
           </div>
           {isLoading ? (
-            <div class="widget">
-              <header class="widget__header"></header>
-              <div class="widget__body">
-                <div class="list-component list-loader"></div>
+            <div className="widget">
+              <header className="widget__header"></header>
+              <div className="widget__body">
+                <div className="list-component list-loader"></div>
               </div>
             </div>
           ) : (
