@@ -34,10 +34,6 @@ function Home() {
         console.log("error", e);
       });
 
-    // const handleSubmit
-    // window.addEventListener("scroll", handleScroll)
-    // return() => window.removeEventListener("scroll")
-
     // async function getUserData() {
     //   try {
     //     setIsLoading(true);
@@ -53,6 +49,7 @@ function Home() {
     //   }
     // }
     // getUserData();
+    
   }, [navigate, page]);
   const handelInfiniteScroll = () => {
     try {
@@ -85,9 +82,9 @@ function Home() {
         })
         .catch((err) => console.log(err));
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1500);
   }
   const logout = () => {
     localStorage.removeItem("token");

@@ -21,7 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 //   );
 // };
 
-const Validation = ({ isUpdate }) => {
+const Validation = ({ isUpdate, isCreate }) => {
   const initialValues = {
     title: "",
     firstName: "",
@@ -68,6 +68,11 @@ const Validation = ({ isUpdate }) => {
     return errors;
   };
   useEffect(() => {
+    if (isCreate) {
+            document.title = "Create User";
+          } else {
+            document.title = "Update user";
+          }
     async function fetchData() {
       try {
         setIsLoading(true);
@@ -90,7 +95,7 @@ const Validation = ({ isUpdate }) => {
     }
 
     fetchData();
-  }, [EditId]);
+  }, [EditId, isCreate]);
 
   // const handleAddUser = (values, event) => {
   //   axios

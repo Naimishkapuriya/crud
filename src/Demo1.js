@@ -68,22 +68,22 @@ const Demo1 = () => {
 
   // =========Dalete=========
 
-  function handleSubmit(id) {
-    const conf = toast.warn("Dalete Successfully");
-    if (conf) {
-      axios({
-        method: "delete",
-        url: `https://dummyapi.io/data/v1/user/${id}`,
-      })
-        .then(() => {
-          navigate("/home");
-        })
-        .catch((err) => console.log(err));
+  async function handleSubmit(id) {
+    try {
+      const conf = toast.warn("Delete Successfully");
+      if (conf) {
+        await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
+          headers: {
+            "app-id": "653b5f77abd70977bb6f21f5",
+          },
+        });
+        // navigate("/demo1");
+      }
+    } catch (err) {
+      console.error(err);
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
   }
+
   // ==================table================
 
   const columns = useMemo(
@@ -92,36 +92,56 @@ const Demo1 = () => {
         Header: "Picture",
         Footer: "picture",
         accessor: "picture",
-        Cell: ({ row }) => <img width={50} height={50} src={row.original.picture} alt="picture" />,
+        Cell: ({ row }) => (
+          <img
+            width={50}
+            height={50}
+            src={row.original.picture}
+            alt="picture"
+          />
+        ),
       },
       {
         Header: "Title",
         Footer: "Title",
-        accessor: "title",
+        columns: [
+          {
+            Header: "Title",
+            Footer: "Title",
+            accessor: "title",
+          },
+        ],
       },
       {
-        Header: "First Name",
-        Footer: "First Name",
-        accessor: "firstName",
+        Header: "Name",
+        Footer: "Name",
+        columns: [
+          {
+            Header: "First Name",
+            Footer: "First Name",
+            accessor: "firstName",
+          },
+          {
+            Header: "Last Name",
+            Footer: "Last Name",
+            accessor: "lastName",
+          },
+        ],
       },
-      {
-        Header: "Last Name",
-        Footer: "Last Name",
-        accessor: "lastName",
-      },
+
       {
         Header: "Actions",
         Footer: "Actions",
         accessor: "id",
-        Cell: ({ value }) => (
+        Cell: ({ value: id }) => (
           <>
             <Link
-              to={`/update/${value}`}
+              to={`/update/${id}`}
               className="editbtn me-2 text-decoration-none"
             >
               Edit
             </Link>
-            <button onClick={() => handleSubmit(value)} className="deletebtn">
+            <button onClick={(e) => handleSubmit(id)} className="deletebtn">
               Delete
             </button>
           </>
@@ -139,7 +159,7 @@ const Demo1 = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    footerGroups,
+    // footerGroups,
     rows,
     prepareRow,
   } = tableInstance;
@@ -166,8 +186,10 @@ const Demo1 = () => {
             </div>
           ) : (
             <div>
-              <table {...getTableProps()} className="table table-dark table-striped mb-0">
-                <thead>
+              <table
+                {...getTableProps()}
+                className="table table-dark table-hover mb-0">
+                <thead className="text-center">
                   {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
@@ -178,7 +200,7 @@ const Demo1 = () => {
                     </tr>
                   ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody className="text-center" {...getTableBodyProps()}>
                   {rows.map((row) => {
                     prepareRow(row);
                     return (
@@ -194,7 +216,7 @@ const Demo1 = () => {
                     );
                   })}
                 </tbody>
-                <tfoot>
+                {/* <tfoot className="text-center">
                   {footerGroups.map((footerGroups) => (
                     <tr {...footerGroups.getFooterGroupProps()}>
                       {footerGroups.headers.map((column) => (
@@ -204,7 +226,7 @@ const Demo1 = () => {
                       ))}
                     </tr>
                   ))}
-                </tfoot>
+                </tfoot> */}
               </table>
             </div>
           )}
