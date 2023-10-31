@@ -3,12 +3,13 @@ import React, { useEffect, useState, useMemo } from "react";
 // import DataTable from "react-data-table-component";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useTable } from "react-table";
+import { useTable, useGlobalFilter } from "react-table";
 import BackToTopButton from "./BackToTopButton";
 
 const Demo1 = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  // const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const limit = 20;
@@ -26,7 +27,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "653b5f77abd70977bb6f21f5",
+              "app-id": "6540c5d074be7a684980328c",
             },
           }
         );
@@ -74,10 +75,11 @@ const Demo1 = () => {
       if (conf) {
         await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
           headers: {
-            "app-id": "653b5f77abd70977bb6f21f5",
+            "app-id": "6540c5d074be7a684980328c",
           },
         });
         // navigate("/demo1");
+        window.location.reload();
       }
     } catch (err) {
       console.error(err);
@@ -154,16 +156,20 @@ const Demo1 = () => {
   const tableInstance = useTable({
     columns,
     data,
-  });
+  }, useGlobalFilter);
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     // footerGroups,
     rows,
+    // state,
+    // setGlobalFilter,
     prepareRow,
   } = tableInstance;
 
+
+  // const {globalFilter} = state
   return (
     <div className="container mt-3">
       <div className="d-flex flex-column align-items-center vh-100">
@@ -186,6 +192,12 @@ const Demo1 = () => {
             </div>
           ) : (
             <div>
+            {/* <div filter={globalFilter} setFilter={setGlobalFilter}>
+            <span>Search :{' '}
+            <input value={filter || ' '}
+            onChange={e =>setFilter(e.target.value)} />
+            </span>
+            </div> */}
               <table
                 {...getTableProps()}
                 className="table table-dark table-hover mb-0">
@@ -204,7 +216,7 @@ const Demo1 = () => {
                   {rows.map((row) => {
                     prepareRow(row);
                     return (
-                      <tr {...row.getRowProps()}>
+                      <tr className="text-capitalize" {...row.getRowProps()}>
                         {row.cells.map((cell) => {
                           return (
                             <td {...cell.getCellProps()}>
