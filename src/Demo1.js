@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useMemo } from "react";
 // import DataTable from "react-data-table-component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTable, useGlobalFilter } from "react-table";
 import BackToTopButton from "./BackToTopButton";
@@ -27,7 +27,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "6540c5d074be7a684980328c",
+              "app-id": "654222634534f6569b945b79",
             },
           }
         );
@@ -75,11 +75,12 @@ const Demo1 = () => {
       if (conf) {
         await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
           headers: {
-            "app-id": "6540c5d074be7a684980328c",
+            "app-id": "654222634534f6569b945b79",
           },
         });
         // navigate("/demo1");
-        window.location.reload();
+        // window.location.reload();
+        setData((prevData) => prevData.filter((user) => user.id !== id));
       }
     } catch (err) {
       console.error(err);
@@ -106,13 +107,7 @@ const Demo1 = () => {
       {
         Header: "Title",
         Footer: "Title",
-        columns: [
-          {
-            Header: "Title",
-            Footer: "Title",
-            accessor: "title",
-          },
-        ],
+        accessor: "title",
       },
       {
         Header: "Name",
@@ -130,7 +125,6 @@ const Demo1 = () => {
           },
         ],
       },
-
       {
         Header: "Actions",
         Footer: "Actions",
@@ -153,10 +147,13 @@ const Demo1 = () => {
     []
   );
 
-  const tableInstance = useTable({
-    columns,
-    data,
-  }, useGlobalFilter);
+  const tableInstance = useTable(
+    {
+      columns,
+      data,
+    },
+    useGlobalFilter
+  );
   const {
     getTableProps,
     getTableBodyProps,
@@ -168,8 +165,6 @@ const Demo1 = () => {
     prepareRow,
   } = tableInstance;
 
-
-  // const {globalFilter} = state
   return (
     <div className="container mt-3">
       <div className="d-flex flex-column align-items-center vh-100">
@@ -192,12 +187,6 @@ const Demo1 = () => {
             </div>
           ) : (
             <div>
-            {/* <div filter={globalFilter} setFilter={setGlobalFilter}>
-            <span>Search :{' '}
-            <input value={filter || ' '}
-            onChange={e =>setFilter(e.target.value)} />
-            </span>
-            </div> */}
               <table
                 {...getTableProps()}
                 className="table table-dark table-hover mb-0">
