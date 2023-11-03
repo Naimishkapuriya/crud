@@ -175,6 +175,7 @@ const Demo1 = () => {
             <Link to="/create" className="addbtn text-decoration-none">
               Add +
             </Link>
+            <GlobalFiltering filter={globalFilter} setFilter={setGlobalFilter} />
             <button onClick={logout} className="deletebtn">
               Logout
             </button>
@@ -188,7 +189,7 @@ const Demo1 = () => {
             </div>
           ) : (
             <div>
-            <GlobalFiltering filter={globalFilter} setFilter={setGlobalFilter} />
+           
               <table
                 {...getTableProps()}
                 className="table table-dark table-hover mb-0">
