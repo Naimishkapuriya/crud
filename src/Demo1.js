@@ -5,6 +5,7 @@ import { Link, useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTable, useGlobalFilter } from "react-table";
 import BackToTopButton from "./BackToTopButton";
+import { GlobalFiltering } from "./GlobalFiltering";
 
 const Demo1 = () => {
   const [data, setData] = useState([]);
@@ -49,7 +50,7 @@ const Demo1 = () => {
       ) {
         // setIsLoading(true);
         setPage((prev) => prev + 1);
-      }
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +70,7 @@ const Demo1 = () => {
 
   // =========Dalete=========
 
-  async function handleSubmit(id) {
+  async function handleDelete(id) {
     try {
       const conf = toast.warn("Delete Successfully");
       if (conf) {
@@ -137,7 +138,7 @@ const Demo1 = () => {
             >
               Edit
             </Link>
-            <button onClick={(e) => handleSubmit(id)} className="deletebtn">
+            <button onClick={(e) => handleDelete(id)} className="deletebtn">
               Delete
             </button>
           </>
@@ -147,24 +148,24 @@ const Demo1 = () => {
     []
   );
 
-  const tableInstance = useTable(
+  
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = useTable(
     {
       columns,
       data,
     },
     useGlobalFilter
   );
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    // footerGroups,
-    rows,
-    // state,
-    // setGlobalFilter,
-    prepareRow,
-  } = tableInstance;
 
+  const { globalFilter } = state;
   return (
     <div className="container mt-3">
       <div className="d-flex flex-column align-items-center vh-100">
@@ -187,6 +188,7 @@ const Demo1 = () => {
             </div>
           ) : (
             <div>
+            <GlobalFiltering filter={globalFilter} setFilter={setGlobalFilter} />
               <table
                 {...getTableProps()}
                 className="table table-dark table-hover mb-0">
