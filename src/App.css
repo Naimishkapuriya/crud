@@ -314,3 +314,12 @@ label {
 
 
 
+.coming-soon img {
+  width: 175px;
+  z-index: 11;
+  position: fixed;
+  top: 0;
+  right: 80px;
+  transform-origin: top;
+  animation: coming-soon 2s ease-in-out alternate infinite;
+}

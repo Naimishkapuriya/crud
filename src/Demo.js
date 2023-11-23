@@ -240,7 +240,7 @@
 
 // export default Demo;
 
-const Demo1 = () => {
+// const Demo = () => {
   // ... other state and variables
 
   // ==============================================++++++++++++++++++++=================================
@@ -326,6 +326,6 @@ const Demo1 = () => {
   //     </div>
   //   </>
   // );
-};
+// };
 
-export default Demo1;
+// export default Demo1;

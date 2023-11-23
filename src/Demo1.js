@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import { useTable, useGlobalFilter } from "react-table";
 import BackToTopButton from "./BackToTopButton";
 import { GlobalFiltering } from "./GlobalFiltering";
-
+// import images from "./images/compny logo.jpg"
 const Demo1 = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   // const [users, setUsers] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const limit = 20;
@@ -28,7 +30,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "654222634534f6569b945b79",
+              "app-id": "655f0afe0adb325be0fa670a",
             },
           }
         );
@@ -76,7 +78,7 @@ const Demo1 = () => {
       if (conf) {
         await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
           headers: {
-            "app-id": "654222634534f6569b945b79",
+            "app-id": "655f0afe0adb325be0fa670a",
           },
         });
         // navigate("/demo1");
@@ -87,11 +89,71 @@ const Demo1 = () => {
       console.error(err);
     }
   }
+  const toggleSelectAll = () => {
+    setSelectAll(!selectAll);
+    if (!selectAll) {
+      const allId = data.map((item) => item.id);
+      setSelectedRows(allId);
+    } else {
+      setSelectedRows([]);
+    }
+  };
+  const toggleRowSelection = (id) => {
+    if (selectedRows.includes(id)) {
+      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
+    } else {
+      setSelectedRows([...selectedRows, id]);
+    }
+  }
+
+
+  const deleteSelectedRows = async () => {
+    try {
+      const confirmed = window.confirm("Selected deleted?");
+      if (confirmed) {
+        const deletedIds = selectedRows;
+        await Promise.all(
+          deletedIds.map(async (id) => {
+            await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
+              headers: {
+                "app-id": "655f0afe0adb325be0fa670a",
+              },
+            });
+          })
+        );
+        setData((prevData) => prevData.filter((user) => !deletedIds.includes(user.id)));
+        setSelectedRows([]);
+        toast.success("user deleted successfully");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error deleting");
+    }
+  };
 
   // ==================table================
 
   const columns = useMemo(
     () => [
+      {
+        Header: (
+          <input
+            type="checkbox"
+            checked={selectAll}
+            onChange={toggleSelectAll}
+            className="form-check-input"
+          />
+        ),
+        accessor: "selection",
+        Cell: ({ row }) => (
+          <input
+            type="checkbox"
+            checked={selectedRows.includes(row.original.id)}
+            onChange={() => toggleRowSelection(row.original.id)}
+            className="form-check-input"
+          />
+        ),
+      },
       {
         Header: "Picture",
         Footer: "picture",
@@ -145,7 +207,7 @@ const Demo1 = () => {
         ),
       },
     ],
-    []
+    [selectedRows, selectAll,data]
   );
 
   
@@ -168,17 +230,26 @@ const Demo1 = () => {
   const { globalFilter } = state;
   return (
     <div className="container mt-3">
+    
       <div className="d-flex flex-column align-items-center vh-100">
         <h1 className="text-center">List of Users</h1>
         <div className="w-50 rounded bg-white border shadow p-4">
           <div className="d-flex justify-content-between mb-2">
+          
             <Link to="/create" className="addbtn text-decoration-none">
               Add +
             </Link>
             <GlobalFiltering filter={globalFilter} setFilter={setGlobalFilter} />
+            <div>
+            {selectedRows.length > 0 && (
+            <button onClick={deleteSelectedRows} className="deletebtn me-2">
+              Delete 
+            </button>
+          )}
             <button onClick={logout} className="deletebtn">
               Logout
             </button>
+            </div>
           </div>
           {isLoading ? (
             <div className="widget">
