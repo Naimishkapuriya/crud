@@ -31,7 +31,7 @@ const Demo1 = () => {
           `https://dummyapi.io/data/v1/user?page=${page}&limit=${limit}`,
           {
             headers: {
-              "app-id": "655f0afe0adb325be0fa670a",
+              "app-id": "656ee6bcc0c50d896cb87b55",
             },
           }
         );
@@ -81,7 +81,7 @@ const Demo1 = () => {
       if (conf) {
         await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
           headers: {
-            "app-id": "655f0afe0adb325be0fa670a",
+            "app-id": "656ee6bcc0c50d896cb87b55",
           },
         });
         // navigate("/demo1");
@@ -116,19 +116,22 @@ const Demo1 = () => {
 
   const deleteSelectedRows = async () => {
     try {
-      const confirmed = window.confirm("Selected deleted?");
+      const confirmed =  toast.warn("deleted successfully");
       if (confirmed) {
         const deletedIds = selectedRows;
+        await Promise.all(
           deletedIds.map(async (id) => {
             await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
               headers: {
-                "app-id": "655f0afe0adb325be0fa670a",
+                "app-id": "656ee6bcc0c50d896cb87b55",
               },
             });
           })
+          );
+
         setData((prevData) => prevData.filter((user) => !deletedIds.includes(user.id)));
         setSelectedRows([]);
-        toast.success("user deleted successfully");
+       
       }
     } catch (error) {
       console.error(error);
