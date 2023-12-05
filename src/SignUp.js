@@ -16,8 +16,8 @@ const SignUp = () => {
       navigate("/home");
     }
   }, [navigate]);
-  // =================Validation ==================
 
+  // =================VALIDATION ==================
 
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
@@ -32,7 +32,9 @@ const SignUp = () => {
     // console.log('39 errors -', errors);
     return Object.keys(errors).length !== 0;
   };
-  // ================================event====================
+
+  // =================EVENT====================
+
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -59,6 +61,7 @@ const SignUp = () => {
     if (isError) {
       return;
     }
+    // ======================= SUGNUP===========================
     axios({
       method: "post",
       url: "https://reqres.in/api/register",

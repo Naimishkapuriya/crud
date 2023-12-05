@@ -23,6 +23,7 @@ const Demo1 = () => {
     if (!localStorage.getItem("token")) {
       navigate("/");
     }
+ // ===============DATA API ==================================
 
     const fetchData = async () => {
       try {
@@ -43,7 +44,9 @@ const Demo1 = () => {
     };
     fetchData();
   }, [page, navigate]);
-  // ===================Infinit================
+
+  // ===================INFINITESCROLL===============================
+
   const handelInfiniteScroll = () => {
     try {
       if (
@@ -62,7 +65,7 @@ const Demo1 = () => {
     return () => window.removeEventListener("Scroll", handelInfiniteScroll);
   }, []);
 
-  // ========logout===============
+  // =================LOGOUT================
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -70,7 +73,7 @@ const Demo1 = () => {
     toast.success("Logout Successfully");
   };
 
-  // =========Dalete=========
+  // =================DELETE====================
 
   async function handleDelete(id) {
     try {
@@ -89,30 +92,33 @@ const Demo1 = () => {
       console.error(err);
     }
   }
+
+  // =================ALL SELESECAT CHECKBOX====================
+
   const toggleSelectAll = () => {
     setSelectAll(!selectAll);
     if (!selectAll) {
-      const allId = data.map((item) => item.id);
-      setSelectedRows(allId);
+      const allid = data.map((item) => item.id);
+      setSelectedRows(allid);
     } else {
       setSelectedRows([]);
     }
   };
   const toggleRowSelection = (id) => {
     if (selectedRows.includes(id)) {
-      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
+      setSelectedRows(selectedRows.filter((rowid) => rowid !== id));
     } else {
       setSelectedRows([...selectedRows, id]);
     }
   }
 
+  // ====================DELETE WITH CHECKBOX=====================
 
   const deleteSelectedRows = async () => {
     try {
       const confirmed = window.confirm("Selected deleted?");
       if (confirmed) {
         const deletedIds = selectedRows;
-        await Promise.all(
           deletedIds.map(async (id) => {
             await axios.delete(`https://dummyapi.io/data/v1/user/${id}`, {
               headers: {
@@ -120,7 +126,6 @@ const Demo1 = () => {
               },
             });
           })
-        );
         setData((prevData) => prevData.filter((user) => !deletedIds.includes(user.id)));
         setSelectedRows([]);
         toast.success("user deleted successfully");
@@ -131,7 +136,7 @@ const Demo1 = () => {
     }
   };
 
-  // ==================table================
+  // ==================RECAT TABLE================
 
   const columns = useMemo(
     () => [
@@ -235,7 +240,6 @@ const Demo1 = () => {
         <h1 className="text-center">List of Users</h1>
         <div className="w-50 rounded bg-white border shadow p-4">
           <div className="d-flex justify-content-between mb-2">
-          
             <Link to="/create" className="addbtn text-decoration-none">
               Add +
             </Link>

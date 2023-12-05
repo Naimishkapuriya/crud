@@ -17,7 +17,7 @@ const Login = () => {
     }
   }, [navigate]);
 
-  // =======================Validation=======================
+  // =======================VALIDATION=======================
 
   const [formErrors, setFormErrors] = useState({});
   const validateForm = () => {
@@ -56,6 +56,7 @@ const Login = () => {
     if (isError) {
       return;
     }
+    // ===========================LOGIN===========================
     axios({
       method: "post",
       url: "https://reqres.in/api/login",

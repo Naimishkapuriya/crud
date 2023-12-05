@@ -38,6 +38,8 @@ const Validation = ({ isUpdate, isCreate }) => {
     setNewUser({ ...newUser, [name]: value });
   };
 
+  // =======================INPUT VALIDATION================
+
   const validate = () => {
     const errors = {};
 
@@ -73,6 +75,9 @@ const Validation = ({ isUpdate, isCreate }) => {
           } else {
             document.title = "Update user";
           }
+
+    // =====================EDIT ======================
+    
     async function fetchData() {
       try {
         setIsLoading(true);

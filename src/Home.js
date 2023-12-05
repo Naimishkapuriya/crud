@@ -19,6 +19,8 @@ function Home() {
     if (!localStorage.getItem("token")) {
       navigate("/");
     }
+    
+    // ===============DATA API ==================================
 
     axios({
       method: "get",
@@ -51,6 +53,9 @@ function Home() {
     // getUserData();
     
   }, [navigate, page]);
+
+  // ======================INFINITESCROLL======================
+
   const handelInfiniteScroll = () => {
     try {
       if (
@@ -69,7 +74,9 @@ function Home() {
     window.addEventListener("scroll", handelInfiniteScroll);
     return () => window.removeEventListener("Scroll", handelInfiniteScroll);
   }, []);
-  // ===============================delete========================================
+
+  // ===============================DELETE========================================
+
   function handleSubmit(id) {
     const conf = toast.warn("Dalete Successfully");
     if (conf) {
@@ -86,7 +93,10 @@ function Home() {
     // setTimeout(() => {
     //   window.location.reload();
     // }, 1500);
-  }
+  } 
+
+  // =============LOGOUT =======================
+
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
