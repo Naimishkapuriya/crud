@@ -136,13 +136,11 @@ const Validation = ({ isUpdate, isCreate }) => {
         })
 
         .then((res) => {
-          console.log(res);
           toast.success("Data Update Successfully");
           navigate("/");
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           toast.error(err.message);
         });
     } else {
@@ -156,14 +154,12 @@ const Validation = ({ isUpdate, isCreate }) => {
         })
 
         .then(({ data }) => {
-          console.log(data);
           toast.success("Submit Successfully");
           navigate("/");
           setIsLoading(false);
         })
 
         .catch((err) => {
-          console.log(err);
           toast.error(err.message);
         });
     }

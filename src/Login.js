@@ -43,7 +43,6 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(email, password);
     e.preventDefault();
     if (!isSubmitting) {
       setIsSubmitting(true);

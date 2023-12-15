@@ -29,7 +29,6 @@ const SignUp = () => {
       errors.password = "*Password is required";
     }
     setFormErrors(errors);
-    // console.log('39 errors -', errors);
     return Object.keys(errors).length !== 0;
   };
 
@@ -46,7 +45,6 @@ const SignUp = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(email, password);
     e.preventDefault();
 
     if (!isSubmitting) {
@@ -57,7 +55,6 @@ const SignUp = () => {
       }, 3000);
     }
     const isError = validateForm();
-    // console.log('error -', isError);
     if (isError) {
       return;
     }
